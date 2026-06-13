@@ -201,11 +201,11 @@ namespace GodotPCKExplorer
 
             bool encryptFiles = files.Any(f => f is PCKPackerRegularFile && f.IsEncrypted);
 
-            if (godotVersion.Pack == (int)PCKUtils.PACK_VERSION.Godot_3)
+            if (godotVersion.Pack <= (int)PCKUtils.PACK_VERSION.Godot_3)
             {
                 if (EncryptionKey != null || encryptIndex || encryptFiles)
                 {
-                    PCKActions.progress?.ShowMessage("Encryption is not supported for PCK files for Godot 3 (pack version 1).", "Error", MessageType.Error);
+                    PCKActions.progress?.ShowMessage("Encryption is not supported for PCK files for Godot 2 and 3 (pack version 0 and 1).", "Error", MessageType.Error);
                     return false;
                 }
             }
@@ -411,7 +411,7 @@ namespace GodotPCKExplorer
 
                             total_size += file.Size; // for progress bar
 
-                            if (godotVersion.Pack < (int)PCKUtils.PACK_VERSION.Godot_4)
+                            if (godotVersion.Pack <= (int)PCKUtils.PACK_VERSION.Godot_3)
                             {
                                 // # empty md5
                                 PCKUtils.AddPadding(index_writer, 16 * sizeof(byte));
@@ -491,7 +491,7 @@ namespace GodotPCKExplorer
                             long pos = index_writer.BaseStream.Position;
                             index_writer.BaseStream.Seek(file.IndexOffsetPosition, SeekOrigin.Begin);
 
-                            if (godotVersion.Pack < (int)PCKUtils.PACK_VERSION.Godot_4)
+                            if (godotVersion.Pack <= (int)PCKUtils.PACK_VERSION.Godot_3)
                             {
                                 index_writer.Write((long)offset);
                             }

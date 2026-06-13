@@ -1174,9 +1174,15 @@ namespace Tests
             Assert.That(PCKUtils.IsVersionInAllowedLimits(new(-1, -1, -1, -1)), Is.False);
 
             Assert.That(PCKUtils.IsVersionInAllowedLimits(new(0, 0, 0, 0)), Is.False);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(0, 1, 2, 6)), Is.False);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(0, 2, 4, 6)), Is.True);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(0, 2, 0, 0)), Is.True);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(0, 2, ushort.MaxValue, ushort.MaxValue)), Is.True);
+
             Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 0, 1, 1)), Is.False);
-            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 1, 0, 0)), Is.True);
-            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 2, 4, 6)), Is.True);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 2, 1, 6)), Is.False);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 3, 1, 6)), Is.True);
+            Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 3, 0, 0)), Is.True);
             Assert.That(PCKUtils.IsVersionInAllowedLimits(new(1, 3, ushort.MaxValue, ushort.MaxValue)), Is.True);
 
             Assert.That(PCKUtils.IsVersionInAllowedLimits(new(2, 3, 1, 5)), Is.False);

@@ -25,6 +25,7 @@ namespace GodotPCKExplorer
 
         public enum PACK_VERSION
         {
+            Godot_2 = 0,
             Godot_3 = 1,
             Godot_4 = 2,
             Godot_4_5 = 3,
@@ -56,9 +57,10 @@ namespace GodotPCKExplorer
 
         public static readonly Dictionary<int, VersionLimitRanges> VersionLimits = new Dictionary<int, VersionLimitRanges>()
         {
-            {1, new VersionLimitRanges(1,0,0, 3,ushort.MaxValue,ushort.MaxValue)},
-            {2, new VersionLimitRanges(4,0,0, 4,4,ushort.MaxValue)},
-            {3, new VersionLimitRanges(4,5,0, ushort.MaxValue,ushort.MaxValue,ushort.MaxValue)},
+            {(int)PACK_VERSION.Godot_2, new VersionLimitRanges(2,0,0, 2,ushort.MaxValue,ushort.MaxValue)},
+            {(int)PACK_VERSION.Godot_3, new VersionLimitRanges(3,0,0, 3,ushort.MaxValue,ushort.MaxValue)},
+            {(int)PACK_VERSION.Godot_4, new VersionLimitRanges(4,0,0, 4,4,ushort.MaxValue)},
+            {(int)PACK_VERSION.Godot_4_5, new VersionLimitRanges(4,5,0, ushort.MaxValue,ushort.MaxValue,ushort.MaxValue)},
         };
 
         static readonly Random rng = new Random();
